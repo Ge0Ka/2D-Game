@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Rigidbody2D enemyRigidbody;
+    public Transform player;
+
+    [SerializeField] private float vida;
+    private Animator animacion;
+    //private LifeBar lifeBar;
+    private bool lookLeft = true;
+    private SpriteRenderer sprite;
+
+
+    private void Start()
     {
-        
+        animacion = GetComponentInChildren<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        enemyRigidbody = GetComponent<Rigidbody2D>();
+        //lifeBar.InicializarLifeBar(vida);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetDamage (float damage)
     {
-        
+        vida -= damage;
+        //lifeBar.CambiarVidaActual(vida);
+
+        if (vida <= 0)
+        {
+            animacion.Play("Death");
+        }
+    }
+
+    private void Dead()
+    {
+        Destroy(gameObject);
+    }
+
+    private void LookPlayer()
+    {
+        if((player.position.x > transform.position.x && lookLeft) || (player.position.x < transform.position.x && !lookLeft))
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+            lookLeft = !lookLeft;            
+        }
     }
 }
