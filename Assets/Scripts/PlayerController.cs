@@ -61,16 +61,17 @@ public class PlayerController : MonoBehaviour
 
     // TODO: añadir la animacion de bajada en el salto
     private void AnimarJugador()
-    {   
+    {
         if (!TouchFloor() && fisica.velocity.y > 0) animacion.Play("HeroKnight_Jump");
-        else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0 && canMove == false)
-            animacion.Play("HeroKnight_Roll");
-        else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0) 
-            animacion.Play("HeroKnight_Run");
-        else if ( fisica.velocity.y == 0) 
-            animacion.Play("HeroKnight_Idle");
-        else if (fisica.velocity.y < 0 && !TouchFloor())
-            animacion.Play("HeroKnight_Fall");
+       else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0 && canMove == false)
+           animacion.Play("HeroKnight_Roll");
+       else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0)
+           animacion.Play("HeroKnight_Run");
+       else if (fisica.velocity.y == 0)
+           animacion.Play("HeroKnight_Idle");
+       else if (fisica.velocity.y < 0 && !TouchFloor())
+           animacion.Play("HeroKnight_Fall");
+      
 
     }
 
