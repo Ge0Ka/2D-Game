@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -20148,8 +20148,8 @@ TextureImporter:
       decorative_obj_723: 1051995582
       decorative_obj_407: 165535211
       decorative_obj_116: -1561107845
-      decorative_obj_638: -495363589
       decorative_obj_49: -964673980
+      decorative_obj_638: -495363589
       decorative_obj_269: -539972451
       decorative_obj_32: 1821347100
       decorative_obj_898: 1809898479

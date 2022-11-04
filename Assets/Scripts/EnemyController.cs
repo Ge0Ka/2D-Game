@@ -23,6 +23,11 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
+    private void Update()
+    {
+        LookPlayer();
+    }
+
     public void GetDamage (float damage)
     {
         vida -= damage;
