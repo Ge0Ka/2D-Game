@@ -36,7 +36,9 @@ public class EnemyController : MonoBehaviour
         if (vida <= 0)
         {
             animacion.Play("Death");
+            Dead();
         }
+
     }
 
     private void Dead()

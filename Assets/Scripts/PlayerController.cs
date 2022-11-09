@@ -44,11 +44,14 @@ public class PlayerController : MonoBehaviour
             fisica.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
         // TODO : Arreglar, si le das al A-D mientras roll, no la capta y se mueve de espaldas
-        if (canMove)
-        {
-            if (Input.GetKey(KeyCode.A)) transform.localScale = new Vector3(-1, 1, 1); 
-            else if (Input.GetKey(KeyCode.D)) transform.localScale = new Vector3(1, 1, 1);
-        }
+        //if (canMove)
+        //{
+        //    if (Input.GetKey(KeyCode.A)) transform.localScale = new Vector3(-1, 1, 1); 
+        //    else if (Input.GetKey(KeyCode.D)) transform.localScale = new Vector3(1, 1, 1);
+        //}
+
+        if(canMove && Mathf.Abs(fisica.velocity.x)!=0) transform.localScale = new Vector3(Mathf.Sign(fisica.velocity.x), 1, 1); 
+
         
         //Otra manera de hacer que gire el sprite
         //if (Input.GetKeyDown(KeyCode.A)) sprite.flipX = false;
@@ -62,17 +65,19 @@ public class PlayerController : MonoBehaviour
     // TODO: añadir la animacion de bajada en el salto
     private void AnimarJugador()
     {
-       // if (!TouchFloor() && fisica.velocity.y > 0) animacion.Play("HeroKnight_Jump");
-       //else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0 && canMove == false)
-       //    animacion.Play("HeroKnight_Roll");
-       //else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0)
-       //    animacion.Play("HeroKnight_Run");
-       //else if (fisica.velocity.y == 0)
-       //    animacion.Play("HeroKnight_Idle");
-       //else if (fisica.velocity.y < 0 && !TouchFloor())
-       //    animacion.Play("HeroKnight_Fall");
-
-       
+        // if (!TouchFloor() && fisica.velocity.y > 0) animacion.Play("HeroKnight_Jump");
+        //else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0 && canMove == false)
+        //    animacion.Play("HeroKnight_Roll");
+        //else if ((fisica.velocity.x > 1 || fisica.velocity.x < -1) && fisica.velocity.y == 0)
+        //    animacion.Play("HeroKnight_Run");
+        //else if (fisica.velocity.y == 0)
+        //    animacion.Play("HeroKnight_Idle");
+        //else if (fisica.velocity.y < 0 && !TouchFloor())
+        //    animacion.Play("HeroKnight_Fall");
+        animacion.SetBool("isRunning", Mathf.Abs(fisica.velocity.x) > 0.1f);
+        animacion.SetBool("isJumping", Mathf.Abs(fisica.velocity.y) > 0.1f && !TouchFloor());
+        animacion.SetBool("isFalling", (fisica.velocity.y) < 0.1f && !TouchFloor());
+        animacion.SetBool("isRolling", canMove==false && TouchFloor());
     }
 
     private void Roller()
