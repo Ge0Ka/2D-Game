@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool canRoll = true;
     private bool canMove = true;
     public GameObject player;
+    private CloseCombat combat;
     
 
     private void Start()
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         animacion = GetComponentInChildren<Animator>();
         player = GetComponent<GameObject>();
+        combat = GetComponent<CloseCombat>();
     }
 
     private void FixedUpdate()
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         animacion.SetBool("isJumping", Mathf.Abs(fisica.velocity.y) > 0.1f && !TouchFloor());
         animacion.SetBool("isFalling", (fisica.velocity.y) < 0.1f && !TouchFloor());
         animacion.SetBool("isRolling", canMove==false && TouchFloor());
+        animacion.SetBool("isAttacking", Input.GetMouseButtonDown(0));
     }
 
     private void Roller()

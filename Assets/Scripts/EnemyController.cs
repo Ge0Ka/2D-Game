@@ -34,11 +34,15 @@ public class EnemyController : MonoBehaviour
         //lifeBar.CambiarVidaActual(vida);
 
         if (vida <= 0)
-        {
-            animacion.Play("Death");
+        {            
             Dead();
         }
 
+    }
+
+    private void BossAnimations()
+    {
+        animacion.SetBool("isDeath",vida<=0);
     }
 
     private void Dead()

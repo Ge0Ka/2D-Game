@@ -17,20 +17,23 @@ public class CloseCombat : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Hit();         
+            Hit();
         }
+        
     }
-    public void Hit()
+    public bool Hit()
     {
-        Collider2D[] objetos = Physics2D.OverlapCircleAll(hitControl.position, hitRadio);       
-
+        Collider2D[] objetos = Physics2D.OverlapCircleAll(hitControl.position, hitRadio);
+        bool makeDamage = false;
         foreach(Collider2D colisionador in objetos)
         {
             if (colisionador.CompareTag("Enemy"))
             {
                 colisionador.transform.GetComponent<EnemyController>().GetDamage(hitDamage);
+                makeDamage = true;
             }
         }
+        return makeDamage;
     }
 
     private void OnDrawGizmos()
